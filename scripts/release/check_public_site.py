@@ -19,8 +19,9 @@ REQUIRED_FILES = (
     "support/index.html",
     "styles.css",
 )
+PRIVATE_SOURCE_REPOSITORY = "YZDame/" + "SuhuangScroll"
 PRIVATE_SOURCE_REPOSITORY_PATTERN = re.compile(
-    r"(?<![A-Za-z0-9_.-])github\.com/YZDame/SuhuangScroll-public(?:/|$)"
+    rf"(?<![A-Za-z0-9_.-])github\.com/{re.escape(PRIVATE_SOURCE_REPOSITORY)}(?:/|$)"
 )
 FORBIDDEN_FRAGMENTS = (
     "/Users/",
