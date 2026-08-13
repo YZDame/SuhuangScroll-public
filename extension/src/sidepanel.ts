@@ -584,7 +584,7 @@ const SPINNING_STATES = new Set<AutomationState>([
 ])
 
 const API_BASE = 'http://127.0.0.1:8000'
-const PUBLIC_SITE_BASE_URL = 'https://suhuangscroll.com'
+const PUBLIC_SITE_BASE_URL = 'https://yzdame.github.io/SuhuangScroll-public'
 const DOCS_URL = `${PUBLIC_SITE_BASE_URL}/docs/`
 
 const app = document.querySelector<HTMLDivElement>('#app')

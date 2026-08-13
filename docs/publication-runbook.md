@@ -109,6 +109,9 @@ python scripts/release/check_public_endpoints.py \
 3. 在公开仓库创建或更新同名 Release，并上传 Runtime、Plugin、Chrome Bridge、Chrome Store 候选包及各自 SHA256；
 4. 用匿名 HTTP 请求验证安装脚本、Release 和全部分发资产。
 
+导出步骤会把同一次 workflow 输入的 `public_base_url` 写入公开 Chrome Bridge
+源码；这样用户从公开仓库自行构建时，也不会回退到尚未通过 HTTPS preflight 的旧站点地址。
+
 公开树会保留 `public-site.yml`，因此可以在公开仓库的 Pages 设置中选择
 **GitHub Actions**，让同一个仓库部署 `/`、`/privacy/`、`/terms/` 和 `/support/`。
 
