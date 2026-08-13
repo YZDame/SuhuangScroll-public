@@ -12,7 +12,7 @@ from urllib.parse import urljoin, urlsplit
 from urllib.request import Request, urlopen
 
 
-SITE_PATHS = ("/", "/docs/", "/privacy/", "/terms/", "/support/")
+SITE_PATHS = ("/", "/docs/", "/privacy/", "/terms/", "/support/", "/chrome/")
 REQUIRED_TOOL_NAMES = {
     "suhuang_runtime_pair",
     "suhuang_runtime_status",

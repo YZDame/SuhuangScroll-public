@@ -14,6 +14,7 @@ SITE_ROOT = ROOT / "site"
 REQUIRED_FILES = (
     "index.html",
     "docs/index.html",
+    "chrome/index.html",
     "privacy/index.html",
     "terms/index.html",
     "support/index.html",
