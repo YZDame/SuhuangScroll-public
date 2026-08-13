@@ -27,6 +27,15 @@
           <li>Review fixture: a local synthetic page for extension healthcheck and dry-run verification.</li>
         </ul>
 
+        <h2>Install order</h2>
+        <ol>
+          <li>Add <code>YZDame/SuhuangScroll-public</code> with <code>codex plugin marketplace add YZDame/SuhuangScroll-public --ref main</code>.</li>
+          <li>Install Suhuang Scroll from Plugins Directory.</li>
+          <li>Install the matching Runtime archive from <a href="https://github.com/YZDame/SuhuangScroll-public/releases/latest">GitHub Releases</a> and run <code>suhuang doctor</code>.</li>
+          <li>Install the <a href="../chrome/">Chrome Bridge</a>.</li>
+          <li>Pair Hosted MCP only when a remote Agent connection is needed.</li>
+        </ol>
+
         <h2>Safety boundary</h2>
         <p>
           The public Plugin surface is limited to diagnostics, contracts, statistics
@@ -37,6 +46,7 @@
 
         <nav aria-label="Documentation navigation">
           <a href="../">Home</a>
+          <a href="../chrome/">Chrome Bridge</a>
           <a href="../privacy/">Privacy</a>
           <a href="../terms/">Terms</a>
           <a href="../support/">Support</a>

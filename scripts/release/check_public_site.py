@@ -5,6 +5,7 @@ from __future__ import annotations
 
 from html.parser import HTMLParser
 from pathlib import Path
+import re
 from urllib.parse import urlparse
 
 
@@ -18,12 +19,13 @@ REQUIRED_FILES = (
     "support/index.html",
     "styles.css",
 )
-PRIVATE_SOURCE_REPOSITORY_LINK = "github.com/" + "YZDame/" + "SuhuangScroll"
+PRIVATE_SOURCE_REPOSITORY_PATTERN = re.compile(
+    r"(?<![A-Za-z0-9_.-])github\.com/YZDame/SuhuangScroll-public(?:/|$)"
+)
 FORBIDDEN_FRAGMENTS = (
     "/Users/",
     "/private/",
     "BEGIN PRIVATE KEY",
-    PRIVATE_SOURCE_REPOSITORY_LINK,
 )
 
 
@@ -66,6 +68,11 @@ def main() -> int:
         for fragment in FORBIDDEN_FRAGMENTS:
             if fragment in text:
                 errors.append(f"private fragment {fragment!r} in {path.relative_to(ROOT)}")
+        if PRIVATE_SOURCE_REPOSITORY_PATTERN.search(text):
+            errors.append(
+                "private source repository URL in "
+                f"{path.relative_to(ROOT)}"
+            )
         parser = LinkParser()
         parser.feed(text)
         if not parser.has_title:

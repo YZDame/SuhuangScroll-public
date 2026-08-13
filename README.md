@@ -36,19 +36,56 @@ Use a pinned version for reproducible deployments. Keep model API keys, browser
 profiles, cookies, Specs, and run records in local user data; do not put them
 in this repository or in a public issue.
 
-## Chrome Extension and Codex Plugin
+## Install the Codex Plugin from GitHub
 
-The Chrome Extension is uploaded separately to the Chrome Web Store. The Codex
-Plugin is the Agent-facing distribution unit and contains Skills, the local
-MCP bridge, and the Hosted Runtime Agent. Plugin installation does not silently
-download executables; use its explicit Runtime setup Skill after installation.
+The public repository is a Git-backed Codex Plugin marketplace. Add it once,
+then install `Suhuang Scroll` from the Plugins Directory:
 
-The public Hosted MCP URL is submitted through the OpenAI Plugin portal. The
-local `.mcp.json` bridge is for development and desktop use; it is not the
-public service endpoint.
+```bash
+codex plugin marketplace add YZDame/SuhuangScroll-public --ref main
+codex plugin marketplace list
+codex plugin list --available --marketplace suhuang-scroll
+```
+
+Open the Codex/ChatGPT desktop **Plugins Directory**, select the `Suhuang
+Scroll` marketplace, and install the Plugin. For scripted environments, the
+equivalent command is:
+
+```bash
+codex plugin add suhuang-scroll@suhuang-scroll
+```
+
+Refresh a Git-backed marketplace and reinstall the current Plugin with:
+
+```bash
+codex plugin marketplace upgrade suhuang-scroll
+codex plugin add suhuang-scroll@suhuang-scroll
+```
+
+The Plugin package contains Skills and a local stdio MCP bridge. It does not
+silently download executables. Use the explicit Runtime setup Skill or the
+versioned installer documented in [Plugin distribution](docs/plugin-distribution.md).
+
+## Chrome Extension and Hosted MCP
+
+The Chrome Extension is a separate browser execution boundary. Install it from
+the Chrome Web Store when the listing is live, or use the matching candidate
+archive from the [GitHub Releases page](https://github.com/YZDame/SuhuangScroll-public/releases/latest)
+for controlled local review. The extension requires affirmative data consent
+before reading a supported grading page.
+
+Hosted MCP is an optional advanced connection. It pairs a user-owned local
+Runtime Agent with the public HTTPS control plane using OAuth; it is not needed
+for the local marketplace workflow and does not receive browser cookies,
+student records, or model keys by default.
+
+The OpenAI universal Plugin Directory is deferred for the current release
+cycle. The same manifest, Skills, and Hosted MCP contract remain compatible with
+a future submission.
 
 ## Documentation
 
+- [Plugin distribution and troubleshooting](docs/plugin-distribution.md)
 - [Install, upgrade, and uninstall](docs/install-upgrade-uninstall.md)
 - [Plugin publication runbook](docs/publication-runbook.md)
 - [Hosted MCP deployment](docs/plugin-mcp-deployment.md)

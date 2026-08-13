@@ -6,20 +6,20 @@
 npm ci --prefix extension
 npm run build --prefix extension
 python scripts/release/package_extension.py \
-  --version 0.6.0 \
+  --version 0.6.2 \
   --channel chrome-store \
   --public-base-url "$SUHUANG_PUBLIC_BASE_URL" \
-  --output dist/release/SuhuangScroll-Bridge-ChromeStore-public-v0.6.0.zip
+  --output dist/release/SuhuangScroll-Bridge-ChromeStore-public-v0.6.2.zip
 python scripts/release/check_chrome_store_package.py \
-  dist/release/SuhuangScroll-Bridge-ChromeStore-public-v0.6.0.zip \
-  --version 0.6.0 \
+  dist/release/SuhuangScroll-Bridge-ChromeStore-public-v0.6.2.zip \
+  --version 0.6.2 \
   --public-base-url "$SUHUANG_PUBLIC_BASE_URL"
 
 python scripts/release/package_chrome_store_listing.py \
   --public-base-url "$SUHUANG_PUBLIC_BASE_URL" \
-  --package-archive "dist/release/SuhuangScroll-Bridge-ChromeStore-public-v0.6.0.zip"
+  --package-archive "dist/release/SuhuangScroll-Bridge-ChromeStore-public-v0.6.2.zip"
 python scripts/release/check_chrome_store_listing.py \
-  dist/release/SuhuangScroll-ChromeStore-listing-v0.6.0.json \
+  dist/release/SuhuangScroll-ChromeStore-listing-v0.6.2.json \
   --public-base-url "$SUHUANG_PUBLIC_BASE_URL" \
   --require-package
 ```

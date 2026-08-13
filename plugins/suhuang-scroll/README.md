@@ -51,6 +51,8 @@ empty statistics, and dry-run safety fields. It is disabled by default and is
 not a substitute for pairing a real Runtime in production.
 
 The Chrome Extension is distributed separately through the Chrome Web Store.
+The public GitHub repository is the primary Plugin marketplace; Hosted MCP is
+an optional advanced connection rather than a prerequisite for local use.
 After installing both components, the local Runtime/API remains the boundary
 between Codex, the vision provider, and browser adapters.
 
@@ -63,11 +65,36 @@ manual-confirmation mode, and `submit` only confirms the pending decision that
 the Chrome adapter is already waiting to execute. Automatic submission is not
 available through the Plugin.
 
+## Install from the public GitHub marketplace
+
+Add the public repository as a Git-backed marketplace and install the Plugin
+from the Codex/ChatGPT desktop Plugins Directory:
+
+```bash
+codex plugin marketplace add YZDame/SuhuangScroll-public --ref main
+codex plugin marketplace list
+codex plugin list --available --marketplace suhuang-scroll
+```
+
+Select the `Suhuang Scroll` marketplace in Plugins Directory and install the
+Plugin. A scripted install can use:
+
+```bash
+codex plugin add suhuang-scroll@suhuang-scroll
+```
+
+Refresh the marketplace for a new release:
+
+```bash
+codex plugin marketplace upgrade suhuang-scroll
+codex plugin add suhuang-scroll@suhuang-scroll
+```
+
 ## Local development
 
 A source checkout may include `.agents/plugins/marketplace.json`. When that
-checkout is available to the target Codex user, add it as a repo marketplace
-and install the Plugin from the normal Codex surface:
+checkout is available to the target Codex user, add it as a local marketplace
+for development and review:
 
 ```bash
 codex plugin marketplace add /path/to/SuhuangScroll
@@ -76,13 +103,15 @@ codex plugin add suhuang-scroll@suhuang-scroll
 ```
 
 Replace `/path/to/SuhuangScroll` with the local checkout or the publisher's
-configured marketplace path. The public Plugin archive is installed through
-the Codex Plugin Directory; it does not embed a source-repository marketplace
-URL.
+configured marketplace path. The public Plugin is installed from the
+GitHub-backed marketplace above. The separate Plugin archive in GitHub
+Releases is a reviewable artifact and a fallback for environments that do not
+use a marketplace.
 
 The exact marketplace name can be checked with `codex plugin marketplace list`.
-This repo marketplace is a discovery/install path for development and review;
-the public Plugin Directory still requires the separate submission workflow.
+The local marketplace path is useful for contributors and for testing changes
+before they are synced to the public repository. The current public release
+does not depend on the OpenAI universal Plugin Directory.
 
 Run the plugin validator and the MCP smoke test from the repository root:
 
@@ -98,11 +127,10 @@ cd core/python
 python -m pip install -e .
 ```
 
-## Publication status
+## Distribution status
 
-The checked-in package is structured for Codex Plugin review. For publication,
-deploy the control plane with OAuth/JWKS validation, set the real HTTPS MCP URL
-in the submission portal, verify the publisher identity and domain, and use the
-checked-in privacy, support, terms, and test-case materials. The local
-`.mcp.json` remains the development/desktop bridge and is not the hosted public
+The checked-in package is ready for the GitHub-backed marketplace and the
+versioned GitHub Release workflow. The Chrome Web Store listing is a separate
+browser install. Hosted MCP is retained as an optional OAuth connection; the
+local `.mcp.json` remains the desktop bridge and is not the hosted public
 service.

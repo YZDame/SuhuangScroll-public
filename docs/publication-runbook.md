@@ -1,13 +1,31 @@
 # Suhuang Scroll public publication runbook
 
-这份 runbook 把仓库内的可重复检查和商店后台的人工步骤串成一条发布路径。
-它不把本地归档校验当成已经通过商店审核。
+这份 runbook 把仓库内的可重复检查和公开分发渠道串成一条发布路径。
+它不把本地归档校验当成已经通过第三方商店审核。
+
+## 当前正式分发决策
+
+当前 release gate 只要求以下四条线可用：
+
+1. **GitHub-backed Plugin Marketplace**：公开仓库的
+   `.agents/plugins/marketplace.json` 暴露 `plugins/suhuang-scroll`，用户运行
+   `codex plugin marketplace add YZDame/SuhuangScroll-public --ref main` 后，从 Plugins
+   Directory 安装。
+2. **GitHub Releases**：同一个 Runtime 版本发布 native Runtime、Chrome Bridge、
+   Plugin、Hosted MCP control-plane（可选部署包）及各自的 SHA256 文件。
+3. **Chrome Web Store**：扩展独立提交和安装；在 listing 生效前，Release 中的
+   `SuhuangScroll-Bridge-ChromeStore` 归档只用于受控测试和审核准备。
+4. **Hosted MCP**：OAuth 保护的高级连接，配对用户自己的 Runtime Agent；不阻塞
+   本地 marketplace 安装，也不接管本地评分语义。
+
+OpenAI universal Plugin Directory 暂不作为当前 release gate。未来若提交官方目录，
+复用现有 Plugin manifest、Skills、MCP 工具和检查资料即可。
 
 ## 当前候选版本
 
 | Artifact | Version | Purpose |
 | --- | --- | --- |
-| Runtime / Chrome Bridge | `0.6.0` | 本地 Python、TUI、Chrome MV3 包 |
+| Runtime / Chrome Bridge | `0.6.2` | 本地 Python、TUI、Chrome MV3 包 |
 | Codex Plugin | `0.1.0` | Skills、本地 stdio bridge、Hosted Runtime Agent |
 | Hosted MCP control plane | `0.1.0` | 公开 `POST /mcp` 部署包 |
 
@@ -15,8 +33,6 @@ Plugin 的公开 MCP 工具覆盖诊断、Spec 校验、统计摘要、阅卷准
 `confirm=true` 的人工确认式阅卷控制。真实浏览器执行、写分和提交仍由本地
 Runtime/Chrome Extension 完成，自动提交模式不通过 MCP 暴露。
 
-公开 Plugin 进入 ChatGPT 与 Codex 共用的 universal plugin directory；本地或仓库
-marketplace 只用于开发、测试和团队分发，不能当作公开发布状态。
 
 ## 必须先具备的外部条件
 
@@ -27,10 +43,10 @@ marketplace 只用于开发、测试和团队分发，不能当作公开发布�
 2. 一个可从公网访问的 `https://<host>/mcp` Hosted MCP endpoint。生产配置需要
    OAuth authorization-server discovery、PKCE S256、JWKS、audience、scope 和
    tenant 映射；静态 bearer token 只用于审核 fixture 或单租户演示。
-3. 已验证的发布者身份、公开仓库归属，以及可监控的 support channel。
-4. OpenAI Platform 的已验证个人/企业开发者身份、Apps Management 写权限
-   （`api.apps.write`），域名 challenge token 和人工审核账号。
-5. Chrome Web Store 开发者账号、隐私实践声明确认和可上传的截图。
+3. 已验证的公开仓库归属，以及可监控的 support channel。
+4. Chrome Web Store 开发者账号、隐私实践声明确认和可上传的截图。
+5. 如果启用 Hosted MCP，还需要 OAuth authorization-server、JWKS、audience、scope
+   和 tenant 映射；这条线是可选的高级连接。
 
 仓库中的 `site/` 是这五个发布页面的可验证参考实现。若使用另一个营销站点
 （例如单独维护的前端仓库）承载同一域名，必须先确认它实际提供上述路径，并把
@@ -62,7 +78,7 @@ python scripts/release/check_mcp_deployment_config.py \
 ```bash
 python scripts/release/check_public_runtime_release.py \
   --release-repo "$SUHUANG_RELEASE_REPO" \
-  --version 0.6.0
+  --version 0.6.2
 ```
 
 运行只读公网检查：
@@ -138,20 +154,24 @@ python scripts/release/check_public_site.py
 python scripts/release/check_chrome_store_assets.py
 ```
 
-## Codex Plugin 提交顺序
+## GitHub-backed Plugin Marketplace 发布顺序
 
-1. 在 OpenAI Platform Plugin submission portal 选择带 MCP 的提交类型，填写真实的
-   Universal Hosted MCP URL，执行 Scan Tools；门户扫描的是公网 MCP，不是现有的
-   developer-mode connection ID。
-2. 检查工具列表、OAuth scope、read-only/confirmation 描述和结果形状。
-3. 上传 `SuhuangScroll-CodexPlugin-public-v0.1.0.zip`，填写 worksheet 中的 listing、
-   5 个 positive tests、3 个 negative tests、地区和 release notes。
-4. 配置域名 challenge；用干净环境打开 privacy、terms、support 页面。
-5. 如果没有业务需要，不添加自定义 UI；没有 UI 时不要上传 UI 截图。提交审核后保留
-   提交编号和审核反馈；不要把审核 token 或后台截图提交到 Git。
+1. 确认公开仓库的 `main` 包含 `.agents/plugins/marketplace.json`、
+   `plugins/suhuang-scroll/.codex-plugin/plugin.json` 和 `.mcp.json`。
+2. 在干净环境运行：
 
-`.app.json` 只用于开发者模式兼容 wiring。公开提交使用门户中的 Hosted MCP URL，
-没有真实 App ID 时不要伪造一个。
+   ```bash
+   codex plugin marketplace add YZDame/SuhuangScroll-public --ref main
+   codex plugin list --available --marketplace suhuang-scroll
+   ```
+
+3. 打开 Plugins Directory，选择 `Suhuang Scroll` marketplace，安装并启用插件。
+4. 刷新版本时运行 `codex plugin marketplace upgrade suhuang-scroll`，再从
+   Plugins Directory 更新或执行 `codex plugin add suhuang-scroll@suhuang-scroll`。
+5. 安装完成后运行 `suhuang doctor --format json`，只在 doctor 通过后准备真实阅卷。
+
+插件归档仍上传到 GitHub Release，便于审阅、回滚和没有 marketplace UI 的环境使用；
+它不代表已经进入 OpenAI universal Plugin Directory。
 
 公共候选包里的 Runtime 安装 Skill 会把安装脚本重写为 `release_repo` 的 raw URL，
 并在执行时显式传入同一个 `--repo` / `-Repository`。这个仓库必须可以让普通用户读取
@@ -160,9 +180,9 @@ python scripts/release/check_chrome_store_assets.py
 
 ## Chrome Web Store 提交顺序
 
-1. 上传 `SuhuangScroll-Bridge-ChromeStore-public-v0.6.0.zip`。
+1. 上传 `SuhuangScroll-Bridge-ChromeStore-public-v0.6.2.zip`。
 2. 上传 128x128 icon、1280x800 screenshot、440x280 promo tile。
-3. 填写 `SuhuangScroll-ChromeStore-listing-public-v0.6.0.json` 对应的名称、描述、
+3. 填写 `SuhuangScroll-ChromeStore-listing-public-v0.6.2.json` 对应的名称、描述、
    权限用途、host permissions、privacy practices、privacy policy、terms 和 support URL。
 4. 在干净 Chrome profile 中安装候选包：先确认未同意时不读页面、不发 heartbeat；
    勾选同意后做 adapter healthcheck 和 synthetic dry-run；撤回同意后确认观察器停止、
@@ -176,8 +196,9 @@ python scripts/release/check_chrome_store_assets.py
 只有同时满足以下条件，才可以对外说“已提交/已发布”：
 
 - 公网 preflight 通过并记录当时的 URL、版本和 checksum；
-- Codex portal 已接受提交并产生可追踪的状态；
+- GitHub-backed marketplace 在干净环境中能够添加、列出并安装 Plugin；
 - Chrome Web Store dashboard 已接受上传并产生可追踪的状态；
 - 隐私、terms、support 页面与上传包中的 URL 和行为一致。
 
 本地测试通过只能说明“候选包可生成且结构正确”，不能替代上述外部状态。
+OpenAI universal Plugin Directory 的提交状态单独记录，不作为本阶段完成条件。

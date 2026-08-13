@@ -115,9 +115,9 @@ def check_authorization_server(issuer: str) -> list[str]:
     auth_methods = metadata.get("token_endpoint_auth_methods_supported")
     if not isinstance(auth_methods, list) or not any(method in auth_methods for method in ("none", "private_key_jwt")):
         errors.append(f"OAuth discovery must support none or private_key_jwt at the token endpoint for {issuer}")
-    scopes = metadata.get("scopes_supported")
-    if isinstance(scopes, list) and "suhuang:runtime" not in scopes:
-        errors.append(f"OAuth discovery scopes_supported omits suhuang:runtime for {issuer}")
+    # Authorization-server discovery may omit resource-specific scopes. The
+    # required scope is checked in protected-resource metadata, MCP tool
+    # security schemes, and the bearer challenge below.
     return errors
 
 

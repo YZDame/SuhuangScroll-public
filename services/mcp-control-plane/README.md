@@ -21,6 +21,11 @@ export SUHUANG_AGENT_TOKEN="$(openssl rand -hex 32)"
 npm start
 ```
 
+生产环境可以从 [`deploy/mcp.env.example`](deploy/mcp.env.example) 复制一份不含
+secret 的配置模板。复制后的文件必须放在受保护的主机路径并设为 `600`；模板中的
+OIDC issuer、JWKS、audience、agent token 和可选审核 token 都必须替换，不能直接把
+示例值用于公网服务。
+
 健康检查：
 
 ```bash
