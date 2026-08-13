@@ -1,5 +1,10 @@
 # Chrome Web Store publication checklist
 
+当前已验证的公开站点 origin 是
+`https://yzdame.github.io/SuhuangScroll-public/`。Chrome Web Store listing
+本身仍需在开发者后台完成上传、审核和发布；候选包可从公开 `v0.6.2`
+Release 下载。
+
 ## Package
 
 ```bash
@@ -33,11 +38,13 @@ source maps, `vite.svg`, or macOS metadata files.
       listing worksheet.
 - [x] Explain every permission, especially supported-site access and localhost
       access, in the source worksheet. Repeat the review in the Chrome dashboard.
-- [ ] Host `extension/store/privacy-policy.md` at a stable HTTPS URL.
-- [ ] Add a monitored HTTPS support URL and keep the support contact visible in
-  the listing.
-- [ ] If terms are shown in the listing or account flow, host
-  `extension/store/terms-of-service.md` at a stable HTTPS URL as well.
+- [x] Host the privacy policy at the verified Pages URL:
+      `https://yzdame.github.io/SuhuangScroll-public/privacy/`.
+- [ ] Activate and monitor the HTTPS support contact before submitting the
+      listing; the public support page is
+      `https://yzdame.github.io/SuhuangScroll-public/support/`.
+- [x] Host the terms page at the verified Pages URL:
+      `https://yzdame.github.io/SuhuangScroll-public/terms/`.
 - [ ] Provide current screenshots of the side panel and a supported test page.
 - [x] Keep the required 1280x800 screenshot, 440x280 small promo tile, and
       128x128 icon in `extension/store/assets/` and validate their dimensions.

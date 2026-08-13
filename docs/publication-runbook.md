@@ -48,6 +48,11 @@ Runtime/Chrome Extension 完成，自动提交模式不通过 MCP 暴露。
 5. 如果启用 Hosted MCP，还需要 OAuth authorization-server、JWKS、audience、scope
    和 tenant 映射；这条线是可选的高级连接。
 
+当前已验证的公开站点 origin 是
+`https://yzdame.github.io/SuhuangScroll-public/`；公开 Plugin、Chrome Bridge
+候选包和 listing worksheet 均应使用这个 origin，除非另一个自定义域名先通过
+同样的 HTTPS preflight。`https://suhuangscroll.com` 当前不作为发布 origin。
+
 仓库中的 `site/` 是这五个发布页面的可验证参考实现。若使用另一个营销站点
 （例如单独维护的前端仓库）承载同一域名，必须先确认它实际提供上述路径，并把
 隐私、条款、支持文案与本仓库的发布行为同步；不要让两个站点同时争用同一个

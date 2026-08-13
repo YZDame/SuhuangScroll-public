@@ -40,8 +40,9 @@ already passed marketplace review.
       repository and rewrites installer instructions away from the private
       development repository.
 - [x] `check_public_runtime_release.py` verifies anonymous installer access and
-      the four native Runtime archives, and confirms both installers default to
-      that public repository before public candidates are generated.
+      the native Runtime, Plugin, and Chrome Bridge Release assets, and confirms
+      both installers default to that public repository before public candidates
+      are generated.
 - [x] Hosted MCP negotiates supported protocol versions, validates modern
       transport headers, and has an exact-match browser Origin allowlist.
 - [x] Hosted MCP has an opt-in, tenant-scoped synthetic reviewer mode so
@@ -59,9 +60,9 @@ python scripts/release/package_codex_plugin.py
 
 ## Before public submission
 
-- [ ] Deploy `services/mcp-control-plane` at a stable HTTPS MCP endpoint. A
-  local stdio command is a development/desktop bridge, not a public hosted
-  endpoint.
+- [x] Deploy `services/mcp-control-plane` at the stable HTTPS endpoint
+      `https://mcp.suhuangscroll.com/mcp`. A local stdio command is a
+      development/desktop bridge, not a public hosted endpoint.
 - [ ] In the Plugin submission portal, enter the public Hosted MCP URL and run
   Scan Tools. A developer-mode `.app.json` connection ID is optional and must
   never be guessed or committed.
@@ -71,8 +72,12 @@ python scripts/release/package_codex_plugin.py
 - [ ] Configure the hosted endpoint with OAuth 2.1/JWKS validation and map the
   authenticated subject to a tenant; static token maps are for local/reviewer
   demo only.
-- [ ] Publish privacy, support, and (if required by the listing) terms pages at
-  stable HTTPS URLs.
+- [x] Publish privacy and terms pages at
+      `https://yzdame.github.io/SuhuangScroll-public/privacy/` and
+      `https://yzdame.github.io/SuhuangScroll-public/terms/`.
+- [ ] Activate and monitor the support mailbox before submitting a public
+      listing; the support page is available at
+      `https://yzdame.github.io/SuhuangScroll-public/support/`.
 - [ ] Verify publisher/developer identity and repository ownership.
 - [ ] Create or confirm the public Runtime release repository used by the
       `--release-repo` input; verify its release assets and installer scripts
