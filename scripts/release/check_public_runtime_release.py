@@ -7,6 +7,7 @@ import argparse
 import json
 import re
 import sys
+from pathlib import Path
 from urllib.error import HTTPError, URLError
 from urllib.parse import quote
 from urllib.request import Request, urlopen
@@ -19,6 +20,8 @@ TARGET_ASSETS = (
     "windows-x64",
     "linux-x64",
 )
+ROOT = Path(__file__).resolve().parents[2]
+PLUGIN_MANIFEST = ROOT / "plugins" / "suhuang-scroll" / ".codex-plugin" / "plugin.json"
 
 
 def installer_default_matches(installer: str, body: bytes, release_repo: str) -> bool:
@@ -110,9 +113,31 @@ def main() -> int:
             f"Suhuang-v{version}-{target}.zip.sha256" if target != "linux-x64" else f"Suhuang-v{version}-{target}.tar.gz.sha256",
         )
     }
+    try:
+        plugin_version = str(json.loads(PLUGIN_MANIFEST.read_text(encoding="utf-8"))["version"])
+    except (OSError, KeyError, TypeError, json.JSONDecodeError) as error:
+        errors.append(f"Plugin manifest version check failed: {error}")
+        plugin_version = ""
+    if plugin_version and not re.fullmatch(r"\d+\.\d+\.\d+(?:[-+][0-9A-Za-z.-]+)?", plugin_version):
+        errors.append(f"Plugin manifest version is not SemVer-like: {plugin_version}")
+    if plugin_version:
+        expected_assets.update(
+            {
+                f"SuhuangScroll-CodexPlugin-v{plugin_version}.zip",
+                f"SuhuangScroll-CodexPlugin-v{plugin_version}.zip.sha256",
+            }
+        )
+    expected_assets.update(
+        {
+            f"SuhuangScroll-Bridge-v{version}.zip",
+            f"SuhuangScroll-Bridge-v{version}.zip.sha256",
+            f"SuhuangScroll-Bridge-ChromeStore-v{version}.zip",
+            f"SuhuangScroll-Bridge-ChromeStore-v{version}.zip.sha256",
+        }
+    )
     missing = sorted(expected_assets - assets)
     if missing:
-        errors.append("Runtime release is missing assets: " + ", ".join(missing))
+        errors.append("public release is missing distribution assets: " + ", ".join(missing))
 
     if errors:
         for error in errors:

@@ -92,17 +92,17 @@ python scripts/release/check_public_endpoints.py \
 ### 同步公开 Runtime 仓库
 
 私有开发仓库负责构建和验证 native packages；公开 Runtime 仓库只接收白名单源树和
-已经发布、经过 smoke test 的四个平台二进制。创建一个非空的公开仓库后，在私有仓库
+已经发布、经过 smoke test 的 Runtime、Plugin、Chrome Bridge 资产。创建一个非空的公开仓库后，在私有仓库
 的 Actions secrets 中配置一个只对该仓库有写权限的 `SUHUANG_PUBLIC_REPO_TOKEN`，
 不要把 token 写入仓库或对话。
 
 私有 `vX.Y.Z` Release 发布完成后，手动运行 **Publish public Runtime mirror** workflow，
-填写同一个版本、源 tag/ref 和 `YZDame/SuhuangScroll-public`。该 workflow 会：
+填写同一个版本、公开站点 origin、源 tag/ref 和 `YZDame/SuhuangScroll-public`。该 workflow 会：
 
-1. 从私有 Release 下载四个平台资产；
+1. 从私有 Release 下载四个平台 Runtime 资产，并构建公开 Plugin、Chrome Bridge 和 Chrome Store 候选包；
 2. 重新执行公开树内容扫描并同步到公开仓库的 `main`；
-3. 在公开仓库创建或更新同名 Release 并上传二进制及 SHA256；
-4. 用匿名 HTTP 请求验证安装脚本、Release 和全部资产。
+3. 在公开仓库创建或更新同名 Release，并上传 Runtime、Plugin、Chrome Bridge、Chrome Store 候选包及各自 SHA256；
+4. 用匿名 HTTP 请求验证安装脚本、Release 和全部分发资产。
 
 公开树会保留 `public-site.yml`，因此可以在公开仓库的 Pages 设置中选择
 **GitHub Actions**，让同一个仓库部署 `/`、`/privacy/`、`/terms/` 和 `/support/`。
