@@ -1,0 +1,11 @@
+{
+  "paperIndex": 1,
+  "studentId": "S1",
+  "ocrText": "设 x 为未知数，2x + 5 = 15，所以 x = 5",
+  "ocrConfidence": 0.91,
+  "aiScore": 8,
+  "aiConfidence": 0.84,
+  "aiReason": "步骤完整，但作答格式略不规范",
+  "status": "ai_scored",
+  "startTime": 1775460904223
+}

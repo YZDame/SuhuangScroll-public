@@ -1,0 +1,100 @@
+import { RuntimeBrowserAdapter } from '../../adapter/runtime-browser-adapter'
+import { CONTENT_MESSAGE_TYPES } from '../../content/messages'
+import type { DescriptorProbe } from '../core/descriptor'
+import {
+  unsupportedSubmitResult,
+  unsupportedWriteResult,
+  type SiteAdapterHealthcheckResult,
+  type SiteGradingAdapter,
+} from '../core/site-adapter'
+
+const runtimeAdapter = new RuntimeBrowserAdapter()
+
+export const TemplateSiteAdapter: SiteGradingAdapter = {
+  id: 'templateSite',
+  displayName: 'Template Site',
+  capabilities: {
+    singleScore: false,
+    batchScores: false,
+    domSubmit: false,
+    networkSubmit: false,
+    observeNext: true,
+    healthcheck: true,
+  },
+  match(url: URL): boolean {
+    return url.hostname === 'template-site.example' || url.hostname.endsWith('.template-site.example')
+  },
+  getPageContext(tabId) {
+    return runtimeAdapter.getPageContext(tabId, this.id)
+  },
+  captureCurrentAnswer(tabId, selector) {
+    return runtimeAdapter.captureCurrentImage(tabId, selector, this.id)
+  },
+  writeScore() {
+    return Promise.resolve(unsupportedWriteResult(this, 'write_score'))
+  },
+  submitScore() {
+    return Promise.resolve(unsupportedSubmitResult(this, 'submit_score'))
+  },
+  submitBatchScores() {
+    return Promise.resolve(unsupportedSubmitResult(this, 'submit_batch_scores'))
+  },
+  observePageChange(tabId, timeoutMs) {
+    return runtimeAdapter.observePageChange(tabId, timeoutMs, this.id)
+  },
+  async healthcheck(tabId): Promise<SiteAdapterHealthcheckResult> {
+    const tab = await chrome.tabs.get(tabId)
+    const matched = tab.url ? safelyMatchUrl(this, tab.url) : false
+    const context = await this.getPageContext(tabId)
+    const probes = await probeAdapterTargets(tabId, this.id)
+    const checks = {
+      adapterMatch: matched,
+      pageContext: Boolean(context.success && context.site === this.id),
+      answerImage: hasProbe(probes, 'answerImage'),
+      nextItemSignal: hasProbe(probes, 'nextItemSignal'),
+      scoreInput: hasProbe(probes, 'scoreInput'),
+      submitButton: hasProbe(probes, 'submitButton'),
+    }
+    const requiredChecks = ['adapterMatch', 'pageContext', 'answerImage']
+    const failures = requiredChecks.filter(check => !checks[check as keyof typeof checks])
+    const validationPassed = failures.length === 0
+
+    return {
+      success: validationPassed,
+      adapterId: this.id,
+      matched,
+      checks,
+      probes,
+      validationPassed,
+      requiredChecks,
+      failures,
+      message: validationPassed ? 'Template Site adapter validation passed' : `Template Site adapter validation failed: ${failures.join(', ')}`,
+      error: context.error || (failures.length > 0 ? failures.join(', ') : undefined),
+    }
+  },
+}
+
+async function probeAdapterTargets(tabId: number, adapterId: string): Promise<DescriptorProbe[]> {
+  try {
+    const response = await chrome.tabs.sendMessage(tabId, {
+      type: CONTENT_MESSAGE_TYPES.probeAdapterTargets,
+      adapterId,
+    })
+    return (response as { probes?: DescriptorProbe[] } | undefined)?.probes || []
+  } catch {
+    return []
+  }
+}
+
+function hasProbe(probes: DescriptorProbe[], target: DescriptorProbe['target']): boolean {
+  return probes.some(probe => probe.target === target && probe.success)
+}
+
+function safelyMatchUrl(adapter: SiteGradingAdapter, url: string): boolean {
+  try {
+    return adapter.match(new URL(url))
+  } catch {
+    return false
+  }
+}
+

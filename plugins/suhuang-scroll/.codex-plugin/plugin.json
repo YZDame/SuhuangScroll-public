@@ -1,0 +1,39 @@
+{
+  "name": "suhuang-scroll",
+  "version": "0.1.0",
+  "description": "Suhuang Scroll Runtime tools for grading-spec preparation, diagnostics, stats, and explicitly confirmed manual grading workflows.",
+  "author": {
+    "name": "Suhuang Scroll"
+  },
+  "homepage": "https://github.com/YZDame/SuhuangScroll-public",
+  "repository": "https://github.com/YZDame/SuhuangScroll-public",
+  "license": "MIT",
+  "keywords": ["grading", "education", "vision", "mcp", "chrome-extension"],
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.json",
+  "interface": {
+    "displayName": "Suhuang Scroll",
+    "shortDescription": "Prepare and inspect local AI-assisted grading workflows.",
+    "longDescription": "Adds Codex skills and a Suhuang MCP bridge: install and verify the local Runtime with confirmation, validate question specs, inspect models and adapters, read run status and aggregate stats, prepare a grading plan, and start or control a manual-confirmation run only after explicit confirmation. Automatic submission is not exposed. The bridge can run locally or through the hosted Runtime relay.",
+    "developerName": "Suhuang Scroll",
+    "category": "Productivity",
+    "websiteURL": "https://github.com/YZDame/SuhuangScroll-public",
+    "privacyPolicyURL": "https://github.com/YZDame/SuhuangScroll-public/blob/main/docs/plugin-privacy-policy.md",
+    "termsOfServiceURL": "https://github.com/YZDame/SuhuangScroll-public/blob/main/docs/plugin-terms.md",
+    "brandColor": "#1F2937",
+    "capabilities": [
+      "Interactive",
+      "Read",
+      "Analyze",
+      "Debug"
+    ],
+    "defaultPrompt": [
+      "Install or repair the Suhuang Runtime without starting grading.",
+      "Prepare a Suhuang grading plan.",
+      "Start a confirmed manual Suhuang grading run."
+    ],
+    "composerIcon": "./assets/composer-icon.png",
+    "logo": "./assets/logo.png",
+    "screenshots": []
+  }
+}

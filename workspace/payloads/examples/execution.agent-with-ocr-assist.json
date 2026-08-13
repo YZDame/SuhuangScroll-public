@@ -1,0 +1,7 @@
+{
+  "mode": "agent_with_ocr_assist",
+  "ocr_provider": "qwen_vl",
+  "ocr_strategy": "text_only",
+  "record_policy": "save_all",
+  "submit_policy": "auto_submit"
+}

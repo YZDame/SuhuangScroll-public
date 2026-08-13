@@ -1,0 +1,77 @@
+import type { TargetDescriptor } from '../core/descriptor'
+import { TEMPLATE_SITE_ANSWER_IMAGE_DESCRIPTOR } from './capture'
+
+export const TEMPLATE_SITE_SCORE_INPUT_DESCRIPTOR: TargetDescriptor = {
+  target: 'scoreInput',
+  locators: [
+    { type: 'placeholder', text: '分', selector: 'input' },
+    { type: 'css', selector: 'input[type="number"]' },
+    { type: 'css', selector: 'input[name*="score" i]' },
+    { type: 'css', selector: 'input[class*="score" i]' },
+    {
+      type: 'nearestToAnchor',
+      anchor: { type: 'text', text: '分数', selector: 'label, span, div' },
+      target: { type: 'role', role: 'textbox' },
+      maxDistancePx: 260,
+    },
+  ],
+  validation: {
+    visible: true,
+    expectedType: 'input',
+    scoreMin: 0,
+  },
+}
+
+export const TEMPLATE_SITE_SUBMIT_BUTTON_DESCRIPTOR: TargetDescriptor = {
+  target: 'submitButton',
+  locators: [
+    { type: 'role', role: 'button', name: '提交' },
+    { type: 'role', role: 'button', name: '保存' },
+    { type: 'text', text: '提交', selector: 'button, a, span, div' },
+    { type: 'text', text: '保存', selector: 'button, a, span, div' },
+    { type: 'css', selector: 'button[type="submit"]' },
+    { type: 'css', selector: 'button[class*="submit" i]' },
+  ],
+  validation: {
+    visible: true,
+    expectedType: 'button',
+  },
+}
+
+export const TEMPLATE_SITE_NEXT_ITEM_SIGNAL_DESCRIPTOR: TargetDescriptor = {
+  target: 'nextItemSignal',
+  locators: [
+    { type: 'role', role: 'button', name: '下一份' },
+    { type: 'role', role: 'button', name: '下一题' },
+    { type: 'text', text: '下一份', selector: 'button, a, span, div' },
+    { type: 'text', text: '下一题', selector: 'button, a, span, div' },
+    { type: 'css', selector: 'button[class*="next" i]' },
+    { type: 'css', selector: 'a[class*="next" i]' },
+  ],
+  validation: {
+    visible: true,
+  },
+}
+
+export const TEMPLATE_SITE_QUESTION_LABEL_DESCRIPTOR: TargetDescriptor = {
+  target: 'questionLabel',
+  locators: [
+    { type: 'css', selector: '.question-title' },
+    { type: 'css', selector: '.paper-title' },
+    { type: 'css', selector: '.title' },
+    { type: 'text', text: '题', selector: 'h1, h2, h3, .title, .question-title' },
+  ],
+  validation: {
+    visible: true,
+    expectedType: 'text',
+  },
+}
+
+export const TEMPLATE_SITE_VALIDATION_DESCRIPTORS = [
+  TEMPLATE_SITE_ANSWER_IMAGE_DESCRIPTOR,
+  TEMPLATE_SITE_QUESTION_LABEL_DESCRIPTOR,
+  TEMPLATE_SITE_NEXT_ITEM_SIGNAL_DESCRIPTOR,
+  TEMPLATE_SITE_SCORE_INPUT_DESCRIPTOR,
+  TEMPLATE_SITE_SUBMIT_BUTTON_DESCRIPTOR,
+]
+

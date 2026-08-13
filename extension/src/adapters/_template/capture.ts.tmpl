@@ -1,0 +1,49 @@
+import type { CaptureImageResult } from '../../adapter/contracts'
+import type { TargetDescriptor } from '../core/descriptor'
+import {
+  captureImageWithDescriptor,
+  getImageHashWithSelectors,
+} from '../../content/capture'
+
+export const TEMPLATE_SITE_IMAGE_SELECTORS = [
+  '.student-answer img',
+  '.answer-sheet img',
+  '.paper-img img',
+  'img[src*="answer"]',
+  'img[src*="paper"]',
+  'canvas.answer-canvas',
+]
+
+export const TEMPLATE_SITE_ANSWER_IMAGE_DESCRIPTOR: TargetDescriptor = {
+  target: 'answerImage',
+  locators: [
+    ...TEMPLATE_SITE_IMAGE_SELECTORS.map(selector => ({ type: 'css' as const, selector })),
+    { type: 'largestImage', minWidth: 200, minHeight: 50 },
+    { type: 'canvas', minWidth: 200, minHeight: 50 },
+  ],
+  validation: {
+    visible: true,
+    minImageWidth: 200,
+    minImageHeight: 50,
+  },
+}
+
+export async function getTemplateSiteQuestionImageBase64(selector?: string): Promise<CaptureImageResult> {
+  return captureImageWithDescriptor({
+    descriptor: selector
+      ? {
+          ...TEMPLATE_SITE_ANSWER_IMAGE_DESCRIPTOR,
+          locators: [
+            { type: 'css', selector },
+            ...TEMPLATE_SITE_ANSWER_IMAGE_DESCRIPTOR.locators,
+          ],
+        }
+      : TEMPLATE_SITE_ANSWER_IMAGE_DESCRIPTOR,
+    notFoundMessage: '未找到 Template Site 答题图片，请检查页面是否已进入阅卷状态',
+  })
+}
+
+export function getTemplateSiteImageHash(): string | null {
+  return getImageHashWithSelectors(TEMPLATE_SITE_IMAGE_SELECTORS)
+}
+

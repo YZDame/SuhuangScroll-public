@@ -1,0 +1,5 @@
+interface:
+  display_name: "Suhuang Adapter"
+  short_description: "Scaffold and validate site adapters"
+  default_prompt: "Use $suhuang-adapter to scaffold a disabled adapter for a new grading site."
+  brand_color: "#2563EB"

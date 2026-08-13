@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Suhuang Scroll</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main>
+      <section class="hero">
+        <p class="eyebrow">Suhuang Scroll</p>
+        <h1>Agent-assisted grading Runtime</h1>
+        <p class="muted">
+          A local-first Runtime, Codex Plugin, and Chrome Bridge for operator-reviewed
+          grading workflows. Specs, decisions, and run events stay under explicit
+          contracts; browser execution remains a separate adapter layer.
+        </p>
+        <nav aria-label="Primary">
+          <a href="docs/">Documentation</a>
+          <a href="privacy/">Privacy</a>
+          <a href="terms/">Terms</a>
+          <a href="support/">Support</a>
+        </nav>
+      </section>
+
+      <article>
+        <h2>How the pieces fit</h2>
+        <ul>
+          <li>The Python Runtime owns grading contracts, model calls, and run state.</li>
+          <li>The Codex Plugin exposes safe inspection and preparation tools.</li>
+          <li>The Chrome Bridge reads supported grading pages and performs explicitly confirmed adapter actions.</li>
+          <li>The operator reviews grading decisions before any score writeback or submission.</li>
+        </ul>
+        <p class="muted">The public release does not include browser cookies, student records, or model credentials.</p>
+      </article>
+
+      <footer>© 2026 Suhuang Scroll</footer>
+    </main>
+  </body>
+</html>

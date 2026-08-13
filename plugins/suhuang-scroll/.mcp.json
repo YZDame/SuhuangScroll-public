@@ -1,0 +1,20 @@
+{
+  "mcpServers": {
+    "suhuang-scroll": {
+      "command": "node",
+      "args": ["mcp/server.mjs"],
+      "cwd": ".",
+      "env_vars": [
+        "SUHUANG_CLI",
+        "SUHUANG_ROOT",
+        "SUHUANG_RUNTIME",
+        "SUHUANG_PYTHON",
+        "SUHUANG_BACKEND_BIN",
+        "SUHUANG_BACKEND",
+        "SUHUANG_API_PORT",
+        "SPEC_DIR",
+        "SUHUANG_WORKSPACE_DIR"
+      ]
+    }
+  }
+}

@@ -1,0 +1,5 @@
+interface:
+  display_name: "Suhuang Stats"
+  short_description: "Analyze Suhuang grading run data"
+  default_prompt: "Use $suhuang-stats to analyze this Suhuang grading run."
+  brand_color: "#2563EB"

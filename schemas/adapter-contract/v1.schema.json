@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/YZDame/SuhuangScroll-public/blob/main/schemas/adapter-contract/v1.schema.json",
+  "title": "Suhuang Scroll Adapter Contract v1",
+  "description": "Site-specific browser execution metadata. It is not a grading rubric.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["manifestSchemaVersion", "default_adapter", "adapters"],
+  "properties": {
+    "manifestSchemaVersion": {"type": "integer", "const": 1},
+    "default_adapter": {"type": "string", "minLength": 1},
+    "adapterStatusValues": {"type": "array", "items": {"type": "string"}},
+    "compatibilityWarnings": {"type": "array", "items": {"type": "string"}},
+    "adapters": {
+      "type": "object",
+      "additionalProperties": {"$ref": "#/$defs/adapter"}
+    }
+  },
+  "$defs": {
+    "adapter": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "displayName", "version", "siteUrls", "capabilities", "status", "autoSubmitEnabled"],
+      "properties": {
+        "id": {"type": "string", "minLength": 1},
+        "displayName": {"type": "string", "minLength": 1},
+        "version": {"type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+"},
+        "siteUrls": {"type": "array", "items": {"type": "string", "format": "uri"}},
+        "description": {"type": "string"},
+        "capabilities": {"type": "object"},
+        "status": {"type": "string"},
+        "createdBy": {"type": "string"},
+        "createdAt": {"type": ["string", "null"], "format": "date-time"},
+        "lastValidatedAt": {"type": ["string", "null"], "format": "date-time"},
+        "minScrollVersion": {"type": ["string", "null"]},
+        "autoSubmitEnabled": {"type": "boolean"},
+        "rollback": {"type": "object"},
+        "notes": {"type": "string"}
+      }
+    }
+  }
+}

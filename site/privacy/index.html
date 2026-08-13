@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Privacy | Suhuang Scroll</title>
+    <link rel="stylesheet" href="../styles.css" />
+  </head>
+  <body>
+    <main>
+      <article>
+        <p class="eyebrow">Suhuang Scroll</p>
+        <h1>Privacy policy</h1>
+        <p class="muted">Last updated: 2026-08-13</p>
+
+        <h2>Local-first processing</h2>
+        <p>
+          The Runtime stores configuration, question specs, run records, OCR text, and
+          model outputs on the operator's computer according to local configuration.
+          The Plugin and Chrome Bridge do not include analytics, advertising, or
+          telemetry by default.
+        </p>
+
+        <h2>Browser data</h2>
+        <p>
+          Before the first grading action, the Chrome Bridge shows a data notice and
+          requires affirmative operator consent. Until consent is granted, it does
+          not read answer images or page context, send grading-page heartbeats, or
+          start its page-image observer. After consent, it can read page context and
+          answer images when an operator invokes a supported workflow. It does not transmit browser
+          cookies, passwords, or credentials to Suhuang Scroll servers. Revoking
+          consent stops page observation, blocks further browser actions, and asks
+          the local Runtime to stop an active automation run.
+        </p>
+
+        <h2>Vision providers</h2>
+        <p>
+          If the operator configures a third-party vision provider, the local Runtime
+          may send captured answer inputs to that provider to produce a grading result.
+          The provider's own privacy policy, retention terms, and regional controls
+          apply. The Codex Plugin does not proxy those model requests.
+        </p>
+
+        <h2>Optional hosted relay</h2>
+        <p>
+          When enabled, the hosted MCP relay receives tool arguments and transient
+          structured results needed to route a request to the paired local Runtime.
+          The reference control plane keeps this queue in memory and does not send it
+          to a model. A deployment operator is responsible for authentication,
+          retention, logs, and regional controls.
+        </p>
+
+        <h2>Questions and deletion requests</h2>
+        <p>
+          Contact the monitored support channel listed on the
+          <a href="../support/">support page</a>. Do not include student data,
+          browser profiles, cookies, or API keys in public requests.
+        </p>
+        <nav aria-label="Policy navigation">
+          <a href="../">Home</a>
+          <a href="../terms/">Terms</a>
+          <a href="../support/">Support</a>
+        </nav>
+      </article>
+      <footer>© 2026 Suhuang Scroll</footer>
+    </main>
+  </body>
+</html>

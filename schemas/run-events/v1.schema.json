@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/YZDame/SuhuangScroll-public/blob/main/schemas/run-events/v1.schema.json",
+  "title": "Suhuang Scroll Run Event v1",
+  "description": "Append-only event envelope for local run diagnostics and replayable state transitions.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["event_id", "run_id", "type", "occurred_at", "data"],
+  "properties": {
+    "event_id": {"type": "string", "minLength": 1},
+    "run_id": {"type": "string", "minLength": 1},
+    "type": {
+      "type": "string",
+      "enum": [
+        "run.created",
+        "run.started",
+        "capture.completed",
+        "grade.completed",
+        "decision.awaiting_confirmation",
+        "record.saved",
+        "submission.requested",
+        "submission.completed",
+        "run.paused",
+        "run.resumed",
+        "run.stopped",
+        "run.failed"
+      ]
+    },
+    "occurred_at": {"type": "string", "format": "date-time"},
+    "sequence": {"type": "integer", "minimum": 0},
+    "data": {"type": "object"}
+  }
+}

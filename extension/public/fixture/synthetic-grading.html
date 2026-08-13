@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Suhuang Scroll synthetic review fixture</title>
+    <style>
+      :root { color-scheme: light; font: 16px/1.5 system-ui, sans-serif; }
+      body { max-width: 880px; margin: 0 auto; padding: 32px; color: #172033; background: #f5f7fb; }
+      main, section { background: #fff; border: 1px solid #d9dfeb; border-radius: 12px; padding: 20px; }
+      main { display: grid; gap: 16px; }
+      canvas { display: block; width: min(100%, 640px); height: auto; border: 1px solid #b8c2d5; background: #fff; }
+      .controls { display: flex; flex-wrap: wrap; align-items: end; gap: 12px; }
+      label { display: grid; gap: 4px; font-weight: 600; }
+      input, button { min-height: 38px; border: 1px solid #aeb9cd; border-radius: 8px; padding: 6px 10px; font: inherit; }
+      button { cursor: pointer; background: #172033; color: #fff; }
+      button.secondary { background: #fff; color: #172033; }
+      #fixture-status { min-height: 1.5em; color: #52627a; }
+      code { background: #eef1f7; border-radius: 4px; padding: 2px 4px; }
+    </style>
+  </head>
+  <body>
+    <main
+      data-paper-index="0"
+      data-question-id="synthetic-question-001"
+      data-suhuang-fixture="true"
+    >
+      <header>
+        <p><strong>Suhuang Scroll · synthetic review fixture</strong></p>
+        <h1 id="question-title">合成题块：计算 2 + 3</h1>
+        <p>此页面只用于 Chrome Extension 的 healthcheck 和 dry-run，不包含真实学生数据。</p>
+      </header>
+
+      <section aria-labelledby="answer-heading">
+        <h2 id="answer-heading">合成作答图像</h2>
+        <canvas id="answer-image" width="640" height="360" aria-label="Synthetic answer image"></canvas>
+      </section>
+
+      <section aria-labelledby="score-heading">
+        <h2 id="score-heading">合成评分目标</h2>
+        <div class="controls">
+          <label>分数（0–10）
+            <input id="score-input" data-score-input type="number" min="0" max="10" value="8" />
+          </label>
+          <label>批量分数 0
+            <input data-batch-score="0" type="number" min="0" max="10" value="8" />
+          </label>
+          <button id="submit-button" type="button">提交合成结果</button>
+          <button id="next-item" class="secondary" type="button">下一份合成题块</button>
+        </div>
+        <p id="fixture-status" role="status" aria-live="polite">等待扩展检查。</p>
+      </section>
+    </main>
+
+    <script src="synthetic-grading.js"></script>
+  </body>
+</html>

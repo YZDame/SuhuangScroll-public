@@ -1,0 +1,5 @@
+interface:
+  display_name: "Suhuang Spec"
+  short_description: "Create and validate grading specs"
+  default_prompt: "Use $suhuang-spec to create a validated Suhuang question spec."
+  brand_color: "#2563EB"

@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/YZDame/SuhuangScroll-public/blob/main/schemas/question-spec/v1.schema.json",
+  "title": "Suhuang Scroll Question Spec v1",
+  "description": "Executable grading contract independent of browser-site adapters.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "subject", "type", "answer", "maxScore"],
+  "properties": {
+    "id": {"type": "string", "minLength": 1},
+    "subject": {"type": "string", "minLength": 1},
+    "content": {"type": "string"},
+    "answer": {"type": "string"},
+    "maxScore": {"type": "integer", "minimum": 1},
+    "type": {"type": "string", "enum": ["single", "fill_blank"]},
+    "criteria": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["step", "score", "desc"],
+        "properties": {
+          "step": {"type": "string", "minLength": 1},
+          "score": {"type": "integer", "minimum": 0},
+          "desc": {"type": "string", "minLength": 1}
+        }
+      }
+    },
+    "blanks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "maxScore"],
+        "properties": {
+          "id": {"type": "string", "minLength": 1},
+          "maxScore": {"type": "integer", "minimum": 0},
+          "description": {"type": ["string", "null"]}
+        }
+      }
+    },
+    "ignore_rules": {"type": "array", "items": {"type": "string"}},
+    "review_confidence_threshold": {"type": "number", "minimum": 0, "maximum": 1},
+    "review_reason_markers": {"type": "array", "items": {"type": "string"}},
+    "flagged_image_confidence_threshold": {"type": "number", "minimum": 0, "maximum": 1},
+    "body_markdown": {"type": "string"}
+  }
+}

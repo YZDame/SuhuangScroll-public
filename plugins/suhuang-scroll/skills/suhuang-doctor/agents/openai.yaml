@@ -1,0 +1,5 @@
+interface:
+  display_name: "Suhuang Doctor"
+  short_description: "Check Suhuang environment readiness"
+  default_prompt: "Use $suhuang-doctor to check my Suhuang environment and adapter setup."
+  brand_color: "#2563EB"

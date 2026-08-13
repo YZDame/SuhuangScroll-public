@@ -1,0 +1,5 @@
+interface:
+  display_name: "Suhuang Runtime Setup"
+  short_description: "Install and verify the local Runtime"
+  default_prompt: "Use $suhuang-runtime-setup to install or repair my local Suhuang Runtime, then verify it without starting grading."
+  brand_color: "#2563EB"

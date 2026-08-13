@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Documentation | Suhuang Scroll</title>
+    <link rel="stylesheet" href="../styles.css" />
+  </head>
+  <body>
+    <main>
+      <article>
+        <p class="eyebrow">Suhuang Scroll</p>
+        <h1>Documentation</h1>
+        <p>
+          Install the local Runtime and Chrome Bridge separately. The Codex Plugin
+          provides Skills, safe inspection/preparation tools, and explicitly
+          confirmed manual-confirmation run controls; it does not silently start
+          grading or enable automatic submission.
+        </p>
+
+        <h2>Release components</h2>
+        <ul>
+          <li>Native Runtime package: CLI, Python backend, and Rust TUI.</li>
+          <li>Codex Plugin package: Skills, local MCP bridge, and optional app wiring.</li>
+          <li>Chrome Web Store package: Side Panel and site adapters.</li>
+          <li>Hosted MCP control plane: HTTPS relay to a user-owned local Runtime Agent.</li>
+          <li>Review fixture: a local synthetic page for extension healthcheck and dry-run verification.</li>
+        </ul>
+
+        <h2>Safety boundary</h2>
+        <p>
+          The public Plugin surface is limited to diagnostics, contracts, statistics
+          summaries, dry preparation, and manual-confirmation run control. Score
+          writeback and website submission stay behind a second operator
+          confirmation in the local browser workflow.
+        </p>
+
+        <nav aria-label="Documentation navigation">
+          <a href="../">Home</a>
+          <a href="../privacy/">Privacy</a>
+          <a href="../terms/">Terms</a>
+          <a href="../support/">Support</a>
+        </nav>
+      </article>
+      <footer>© 2026 Suhuang Scroll</footer>
+    </main>
+  </body>
+</html>
