@@ -25,7 +25,7 @@ OpenAI universal Plugin Directory 暂不作为当前 release gate。未来若提
 
 | Artifact | Version | Purpose |
 | --- | --- | --- |
-| Runtime / Chrome Bridge | `0.6.2` | 本地 Python、TUI、Chrome MV3 包 |
+| Runtime / Chrome Bridge | `0.6.4` | 本地 Python、TUI、Chrome MV3 包 |
 | Codex Plugin | `0.1.0` | Skills、本地 stdio bridge、Hosted Runtime Agent |
 | Hosted MCP control plane | `0.1.0` | 公开 `POST /mcp` 部署包 |
 
@@ -83,7 +83,7 @@ python scripts/release/check_mcp_deployment_config.py \
 ```bash
 python scripts/release/check_public_runtime_release.py \
   --release-repo "$SUHUANG_RELEASE_REPO" \
-  --version 0.6.2
+  --version 0.6.4
 ```
 
 运行只读公网检查：
@@ -188,9 +188,9 @@ python scripts/release/check_chrome_store_assets.py
 
 ## Chrome Web Store 提交顺序
 
-1. 上传 `SuhuangScroll-Bridge-ChromeStore-public-v0.6.2.zip`。
+1. 上传 `SuhuangScroll-Bridge-ChromeStore-public-v0.6.4.zip`。
 2. 上传 128x128 icon、1280x800 screenshot、440x280 promo tile。
-3. 填写 `SuhuangScroll-ChromeStore-listing-public-v0.6.2.json` 对应的名称、描述、
+3. 填写 `SuhuangScroll-ChromeStore-listing-public-v0.6.4.json` 对应的名称、描述、
    权限用途、host permissions、privacy practices、privacy policy、terms 和 support URL。
 4. 在干净 Chrome profile 中安装候选包：先确认未同意时不读页面、不发 heartbeat；
    勾选同意后做 adapter healthcheck 和 synthetic dry-run；撤回同意后确认观察器停止、

@@ -15,7 +15,7 @@ Install a specific release:
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/YZDame/SuhuangScroll-public/main/scripts/install/install.sh |
-  bash -s -- --version v0.6.2
+  bash -s -- --version v0.6.4
 ```
 
 The installer detects `macos-arm64`, `macos-x64`, or `linux-x64`, downloads the
@@ -35,7 +35,7 @@ irm https://raw.githubusercontent.com/YZDame/SuhuangScroll-public/main/scripts/i
 For a specific release, download the script and run:
 
 ```powershell
-.\install.ps1 -Version v0.6.2
+.\install.ps1 -Version v0.6.4
 ```
 
 The default program directory is `%LOCALAPPDATA%\Suhuang Scroll`; the command

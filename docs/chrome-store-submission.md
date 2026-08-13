@@ -2,7 +2,7 @@
 
 当前已验证的公开站点 origin 是
 `https://yzdame.github.io/SuhuangScroll-public/`。Chrome Web Store listing
-本身仍需在开发者后台完成上传、审核和发布；候选包可从公开 `v0.6.2`
+本身仍需在开发者后台完成上传、审核和发布；候选包可从公开 `v0.6.4`
 Release 下载。
 
 ## Package
@@ -11,20 +11,20 @@ Release 下载。
 npm ci --prefix extension
 npm run build --prefix extension
 python scripts/release/package_extension.py \
-  --version 0.6.2 \
+  --version 0.6.4 \
   --channel chrome-store \
   --public-base-url "$SUHUANG_PUBLIC_BASE_URL" \
-  --output dist/release/SuhuangScroll-Bridge-ChromeStore-public-v0.6.2.zip
+  --output dist/release/SuhuangScroll-Bridge-ChromeStore-public-v0.6.4.zip
 python scripts/release/check_chrome_store_package.py \
-  dist/release/SuhuangScroll-Bridge-ChromeStore-public-v0.6.2.zip \
-  --version 0.6.2 \
+  dist/release/SuhuangScroll-Bridge-ChromeStore-public-v0.6.4.zip \
+  --version 0.6.4 \
   --public-base-url "$SUHUANG_PUBLIC_BASE_URL"
 
 python scripts/release/package_chrome_store_listing.py \
   --public-base-url "$SUHUANG_PUBLIC_BASE_URL" \
-  --package-archive "dist/release/SuhuangScroll-Bridge-ChromeStore-public-v0.6.2.zip"
+  --package-archive "dist/release/SuhuangScroll-Bridge-ChromeStore-public-v0.6.4.zip"
 python scripts/release/check_chrome_store_listing.py \
-  dist/release/SuhuangScroll-ChromeStore-listing-v0.6.2.json \
+  dist/release/SuhuangScroll-ChromeStore-listing-v0.6.4.json \
   --public-base-url "$SUHUANG_PUBLIC_BASE_URL" \
   --require-package
 ```

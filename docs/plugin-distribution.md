@@ -78,7 +78,7 @@ suhuang doctor
 ```
 
 For a reproducible deployment, replace `latest` with a release such as
-`v0.6.2`. The installer verifies the downloaded SHA256 file and keeps Specs,
+`v0.6.4`. The installer verifies the downloaded SHA256 file and keeps Specs,
 configuration, and run records in the user data directory. Windows users
 should follow the PowerShell instructions in
 [Install, upgrade, and uninstall](install-upgrade-uninstall.md).
