@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>使用文档 | Suhuang Scroll</title><link rel="stylesheet" href="../../styles.css"></head>
+
+<body><main><nav class="language" aria-label="Language"><span aria-current="page">中文</span><a href="../../docs/" lang="en">English</a></nav>
+
+<article><p class="eyebrow">苏黄共阅 · Suhuang Scroll</p>
+<h1>从第一次试评开始</h1>
+<p>安装配套的主程序和 Chrome 扩展。使用原生发布包无需安装 Python、Node.js 或 Rust。</p>
+<h2>1. 连接你的工具</h2>
+<ol><li>从<a href="https://github.com/YZDame/SuhuangScroll-public/releases/latest">发布页</a>下载对应系统的软件包。当前 Windows 软件包面向 x64。</li>
+<li>按版本说明安装，运行 <code>suhuang setup</code> 配置 AI 服务，再用 <code>suhuang doctor</code> 检查安装。</li>
+<li>安装 <a href="../chrome/">Chrome 扩展</a>，打开阅卷网站并登录。</li>
+<li>运行 <code>suhuang</code> 打开 TUI，或使用单独安装的 DeepSeek Harness 苏黄共阅插件。</li>
+</ol>
+<h2>2. 让 AI 整理评分标准</h2>
+<p>在 AI 客户端中上传已有题目、参考答案和评分细则，让 AI 使用 <code>suhuang-spec</code> 生成 Spec Markdown。使用前检查评分规则。</p>
+<p>在 DeepSeek Harness 插件中点击“导入评分标准（.md）”。导入只校验并保存在本机，不会开始阅卷；同名文件不会覆盖，请重命名后导入。TUI 中用 <code>/spec</code> 选择文件。</p>
+<h2>3. 先试评，再开始</h2>
+<p>确认网站、题目、评分标准和模型，先检查少量答卷。真实阅卷可能按当前流程写入并提交成绩，请仔细阅读确认提示。需要检查结果时，先暂停。</p>
+<h2>TUI 常用命令</h2>
+<ul><li><code>/spec</code>：选择评分标准。</li>
+<li><code>/adapter</code>：选择阅卷网站。</li>
+<li><code>/start</code>、<code>/pause</code>、<code>/resume</code>、<code>/stop</code>：开始、暂停、继续、结束。</li>
+<li><code>/guide</code>：查看准备评分标准和新网站适配指引。</li>
+<li><code>/hints off</code>：隐藏中文注释；<code>/hints on</code>：恢复。偏好会保存在本机。</li>
+</ul>
+<h2>遇到新阅卷网站？</h2>
+<p>把网站地址告诉本地 AI Agent，让它使用 <code>suhuang-adapter</code>。保持扩展开启，先让 Agent 确认有可编辑源码和构建工具，再检查浏览器工具或扩展能访问该网站；新域名可能需要新增扩展权限并重新加载。让 Agent 创建禁用态 adapter，通过健康检查和模拟页面 dry-run 后，再由你决定是否启用。适配开发过程中不要读取真实学生答卷、写分或提交。</p>
+<details><summary>可选的 Codex 与远程 Agent 连接</summary>
+<p>Codex 插件提供技能、诊断、准备和人工确认控制。按对应版本的插件目录或市场说明安装即可。Hosted MCP 用于远程 Agent 连接已配对的本地 Runtime Agent，本地 TUI 使用不需要它。</p>
+<p>公开 Codex 插件的写分和网站提交还需要本地操作者再次确认。</p>
+</details>
+<nav aria-label="页面导航"><a href=".././">首页</a><a href="../chrome/">Chrome 扩展</a><a href="../privacy/">隐私</a><a href="../terms/">条款</a><a href="../support/">帮助</a></nav>
+</article>
+<footer>© 2026 Suhuang Scroll</footer>
+</main>
+</body>
+</html>

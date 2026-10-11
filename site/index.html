@@ -1,51 +1,27 @@
 <!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Suhuang Scroll</title>
-    <link rel="stylesheet" href="styles.css" />
-  </head>
-  <body>
-    <main>
-      <section class="hero">
-        <p class="eyebrow">Suhuang Scroll</p>
-        <h1>Agent-assisted grading Runtime</h1>
-        <p class="muted">
-          A local-first Runtime, Codex Plugin, and Chrome Bridge for operator-reviewed
-          grading workflows. Specs, decisions, and run events stay under explicit
-          contracts; browser execution remains a separate adapter layer.
-        </p>
-        <nav aria-label="Primary">
-          <a href="docs/">Documentation</a>
-          <a href="chrome/">Chrome Bridge</a>
-          <a href="https://github.com/YZDame/SuhuangScroll-public/releases/latest">Releases</a>
-          <a href="privacy/">Privacy</a>
-          <a href="terms/">Terms</a>
-          <a href="support/">Support</a>
-        </nav>
-      </section>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Suhuang Scroll | Suhuang Scroll</title><link rel="stylesheet" href="styles.css"></head>
 
-      <article>
-        <h2>How the pieces fit</h2>
-        <ul>
-          <li>The Python Runtime owns grading contracts, model calls, and run state.</li>
-          <li>The Codex Plugin exposes safe inspection and preparation tools.</li>
-          <li>The Chrome Bridge reads supported grading pages and performs explicitly confirmed adapter actions.</li>
-          <li>The operator reviews grading decisions before any score writeback or submission.</li>
-        </ul>
-        <h2>Install surfaces</h2>
-        <p>
-          Add the public repository as a Git-backed Codex Plugin marketplace,
-          install the local Runtime from GitHub Releases, and install the Chrome
-          Bridge separately. Hosted MCP is an optional OAuth connection for a
-          user-owned Runtime Agent.
-        </p>
-        <pre><code>codex plugin marketplace add YZDame/SuhuangScroll-public --ref main</code></pre>
-        <p class="muted">The public release does not include browser cookies, student records, or model credentials.</p>
-      </article>
+<body><main><nav class="language" aria-label="Language"><span aria-current="page">English</span><a href="zh/" lang="zh-CN">中文</a></nav>
 
-      <footer>© 2026 Suhuang Scroll</footer>
-    </main>
-  </body>
+<article><p class="eyebrow">Suhuang Scroll</p>
+<h1>Grading, with your judgment in control.</h1>
+<p>A local grading assistant that connects your AI service to supported grading websites. Prepare a marking guide with your AI client, check a few answers, then begin a run when you are ready.</p>
+
+<h2>Start with three things</h2>
+<ol><li>Install Suhuang Scroll on your computer.</li>
+<li>Install the Chrome Bridge and sign in to your grading website.</li>
+<li>Ask your AI client to turn your question, reference answer and marking guide into a Spec Markdown file.</li>
+</ol>
+
+<p><a href="docs/">Read the getting-started guide</a> · <a href="https://github.com/YZDame/SuhuangScroll-public/releases/latest">Download releases</a></p>
+
+<h2>Keep the workflow familiar</h2>
+<p>Use the TUI or the optional DeepSeek Harness plugin to choose your Spec, start, pause and review a run. The extension connects the grading page. You do not need to write the Spec yourself.</p>
+
+<p class="muted">Check sample results before continuous grading. If you use a remote AI service, answer images are sent to that provider according to your configuration.</p>
+<nav aria-label="Navigation"><a href="docs/">Guide</a><a href="chrome/">Chrome Bridge</a><a href="privacy/">Privacy</a><a href="terms/">Terms</a><a href="support/">Support</a></nav>
+</article>
+<footer>© 2026 Suhuang Scroll</footer>
+</main>
+</body>
 </html>

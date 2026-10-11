@@ -1,111 +1,25 @@
-:root {
-  color-scheme: light;
-  --ink: #172033;
-  --muted: #5c667a;
-  --line: #dce2eb;
-  --paper: #ffffff;
-  --wash: #f5f7fb;
-  --accent: #b42318;
-}
-
-* {
-  box-sizing: border-box;
-}
-
-body {
-  margin: 0;
-  background: var(--wash);
-  color: var(--ink);
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  line-height: 1.65;
-}
-
-main {
-  width: min(860px, calc(100% - 32px));
-  margin: 0 auto;
-  padding: 56px 0 72px;
-}
-
-article,
-.hero {
-  background: var(--paper);
-  border: 1px solid var(--line);
-  border-radius: 16px;
-  padding: 32px;
-  box-shadow: 0 12px 36px rgb(23 32 51 / 6%);
-}
-
-.hero {
-  margin-bottom: 20px;
-}
-
-h1,
-h2,
-h3 {
-  line-height: 1.25;
-}
-
-h1 {
-  margin: 0 0 12px;
-  font-size: clamp(2rem, 5vw, 3.25rem);
-}
-
-h2 {
-  margin-top: 32px;
-}
-
-p,
-ul {
-  margin: 0 0 16px;
-}
-
-.eyebrow {
-  color: var(--accent);
-  font-size: 0.8rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-}
-
-.muted {
-  color: var(--muted);
-}
-
-nav {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px 18px;
-  margin-top: 24px;
-}
-
-a {
-  color: var(--accent);
-}
-
-nav a {
-  font-weight: 600;
-}
-
-footer {
-  color: var(--muted);
-  font-size: 0.9rem;
-  margin-top: 18px;
-  text-align: center;
-}
-
-code {
-  background: #eef1f6;
-  border-radius: 4px;
-  padding: 0.1em 0.3em;
-}
-
-@media (max-width: 560px) {
-  main {
-    padding-top: 24px;
-  }
-
-  article,
-  .hero {
-    padding: 22px;
-  }
-}
+/* Flexoki base palette by Steph Ango, https://stephango.com/flexoki (MIT).
+   Layout is original; typography inspired by the reading-first approach of Kami. */
+:root { color-scheme: light dark; --ink:#100f0f; --muted:#6f6e69; --line:#dad8ce; --paper:#fffcf0; --wash:#f2f0e5; --accent:#205ea6; }
+@media (prefers-color-scheme:dark) { :root { --ink:#cecdc3; --muted:#b7b5ac; --line:#403e3c; --paper:#100f0f; --wash:#1c1b1a; --accent:#4385be; } }
+* { box-sizing:border-box; }
+body { margin:0; background:var(--paper); color:var(--ink); font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif; font-size:17px; line-height:1.85; overflow-wrap:anywhere; }
+main { width:min(700px,calc(100% - 40px)); margin:auto; padding:36px 0 56px; }
+article,.hero { padding:0; }
+h1,h2,h3 { line-height:1.35; font-weight:600; letter-spacing:-.025em; }
+h1 { font-size:clamp(1.8rem,5vw,2.5rem); margin:24px 0; }
+h2 { font-size:1.35rem; margin:40px 0 14px; }
+h3 { font-size:1.05rem; margin-top:28px; }
+p,ul,ol { margin:0 0 20px; }
+li { margin-bottom:8px; } ul,ol { padding-inline-start:1.4em; }
+a { color:var(--accent); text-underline-offset:4px; text-decoration-thickness:1px; }
+a:hover { text-decoration-thickness:2px; }
+a:focus-visible,summary:focus-visible { outline:2px solid var(--accent); outline-offset:4px; }
+.eyebrow,.muted,footer { color:var(--muted); } .eyebrow { font-size:14px; margin:0; letter-spacing:.02em; }
+nav { display:flex; flex-wrap:wrap; gap:8px 20px; font-size:14px; margin:32px 0 0; padding-top:18px; border-top:1px solid var(--line); }
+nav.language { margin:0 0 30px; border:0; padding:0; justify-content:flex-end; }
+footer { font-size:13px; margin-top:40px; padding-top:16px; border-top:1px solid var(--line); }
+code { font-family:ui-monospace,SFMono-Regular,Consolas,monospace; font-size:.87em; background:var(--wash); padding:.15em .3em; border-radius:3px; }
+pre { background:var(--wash); padding:16px; overflow:auto; line-height:1.65; border-radius:4px; } pre code { padding:0; background:none; }
+details { border-block:1px solid var(--line); padding:12px 0; margin:24px 0; } summary { cursor:pointer; font-weight:500; } details p:first-of-type { margin-top:18px; }
+@media(max-width:560px) { body { font-size:16px; } main { padding-top:20px; } }

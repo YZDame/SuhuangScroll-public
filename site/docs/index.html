@@ -1,58 +1,44 @@
 <!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Documentation | Suhuang Scroll</title>
-    <link rel="stylesheet" href="../styles.css" />
-  </head>
-  <body>
-    <main>
-      <article>
-        <p class="eyebrow">Suhuang Scroll</p>
-        <h1>Documentation</h1>
-        <p>
-          Install the local Runtime and Chrome Bridge separately. The Codex Plugin
-          provides Skills, safe inspection/preparation tools, and explicitly
-          confirmed manual-confirmation run controls; it does not silently start
-          grading or enable automatic submission.
-        </p>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Documentation | Suhuang Scroll</title><link rel="stylesheet" href="../styles.css"></head>
 
-        <h2>Release components</h2>
-        <ul>
-          <li>Native Runtime package: CLI, Python backend, and Rust TUI.</li>
-          <li>Codex Plugin package: Skills, local MCP bridge, and optional app wiring.</li>
-          <li>Chrome Web Store package: Side Panel and site adapters.</li>
-          <li>Hosted MCP control plane: HTTPS relay to a user-owned local Runtime Agent.</li>
-          <li>Review fixture: a local synthetic page for extension healthcheck and dry-run verification.</li>
-        </ul>
+<body><main><nav class="language" aria-label="Language"><span aria-current="page">English</span><a href="../zh/docs/" lang="zh-CN">中文</a></nav>
 
-        <h2>Install order</h2>
-        <ol>
-          <li>Add <code>YZDame/SuhuangScroll-public</code> with <code>codex plugin marketplace add YZDame/SuhuangScroll-public --ref main</code>.</li>
-          <li>Install Suhuang Scroll from Plugins Directory.</li>
-          <li>Install the matching Runtime archive from <a href="https://github.com/YZDame/SuhuangScroll-public/releases/latest">GitHub Releases</a> and run <code>suhuang doctor</code>.</li>
-          <li>Install the <a href="../chrome/">Chrome Bridge</a>.</li>
-          <li>Pair Hosted MCP only when a remote Agent connection is needed.</li>
-        </ol>
+<article><p class="eyebrow">Suhuang Scroll</p>
+<h1>Getting started</h1>
+<p>Install the matching local program and Chrome extension. You do not need Python, Node.js or Rust to use a native release.</p>
 
-        <h2>Safety boundary</h2>
-        <p>
-          The public Plugin surface is limited to diagnostics, contracts, statistics
-          summaries, dry preparation, and manual-confirmation run control. Score
-          writeback and website submission stay behind a second operator
-          confirmation in the local browser workflow.
-        </p>
+<h2>1. Connect your tools</h2>
+<ol><li>Download the package for your system from <a href="https://github.com/YZDame/SuhuangScroll-public/releases/latest">Releases</a>. The current Windows package targets x64.</li>
+<li>Follow the release installation instructions, then run <code>suhuang setup</code> to configure your AI service and <code>suhuang doctor</code> to check the installation.</li>
+<li>Install the <a href="../chrome/">Chrome Bridge</a>, open your grading website and sign in.</li>
+<li>Run <code>suhuang</code> for the TUI, or use the separately installed Suhuang Scroll plugin in DeepSeek Harness.</li>
+</ol>
 
-        <nav aria-label="Documentation navigation">
-          <a href="../">Home</a>
-          <a href="../chrome/">Chrome Bridge</a>
-          <a href="../privacy/">Privacy</a>
-          <a href="../terms/">Terms</a>
-          <a href="../support/">Support</a>
-        </nav>
-      </article>
-      <footer>© 2026 Suhuang Scroll</footer>
-    </main>
-  </body>
+<h2>2. Let your AI prepare the marking guide</h2>
+<p>Upload your existing question, answer and marking guide to your AI client. Ask it to use <code>suhuang-spec</code> to produce a Spec Markdown file. Review the scoring rules before using it.</p>
+<p>In the DeepSeek Harness plugin, choose “Import grading Spec (.md)”. Import validates and saves the file locally; it does not begin grading. Rename the file if a Spec with the same name already exists. In the TUI, use <code>/spec</code> to select it.</p>
+
+<h2>3. Check, then grade</h2>
+<p>Confirm the website, question, marking guide and model. Check a small sample first. Starting a real run can write and submit grades according to the configured workflow; review the confirmation carefully. Pause when you need to inspect a result.</p>
+
+<h2>Useful TUI commands</h2>
+<ul><li><code>/spec</code> — choose the marking guide.</li>
+<li><code>/adapter</code> — choose the grading website.</li>
+<li><code>/start</code>, <code>/pause</code>, <code>/resume</code>, <code>/stop</code> — control the run.</li>
+<li><code>/guide</code> — preparation and new-website guidance.</li>
+<li><code>/hints off</code> — hide Chinese command hints; <code>/hints on</code> restores them. The preference is saved locally.</li>
+</ul>
+
+<h2>A new grading website?</h2>
+<p>Ask your local Agent to use <code>suhuang-adapter</code> with the website URL. Keep the extension enabled. The Agent needs editable adapter sources and build tools. It must first check whether its browser tools or the extension can access the page; a new domain can require extension permissions and a reload. It should create a disabled adapter and pass healthcheck and synthetic dry-run checks before you choose to enable it. Do not use real student answers or submit scores while developing it.</p>
+
+<details><summary>Optional Codex and remote Agent connections</summary>
+<p>The Codex Plugin provides Skills, diagnostics, preparation and manual-confirmation controls. Install it from the published plugin directory or marketplace instructions for your release. Hosted MCP is optional and connects a remote Agent to a paired local Runtime Agent. It is not required for local TUI use.</p>
+<p>The public Codex Plugin keeps score writeback and website submission behind an additional local operator confirmation.</p>
+</details>
+<nav aria-label="Navigation"><a href=".././">Home</a><a href="../chrome/">Chrome Bridge</a><a href="../privacy/">Privacy</a><a href="../terms/">Terms</a><a href="../support/">Support</a></nav>
+</article>
+<footer>© 2026 Suhuang Scroll</footer>
+</main>
+</body>
 </html>

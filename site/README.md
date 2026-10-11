@@ -34,3 +34,14 @@ settings only after confirming that no other public site owns that hostname;
 keep the resulting HTTPS origin in `SUHUANG_PUBLIC_BASE_URL`. The source tree
 intentionally does not pin a CNAME so the public origin remains an explicit
 deployment choice.
+
+## Reading and languages
+
+All six public pages have English and Chinese versions. English uses the existing
+paths; Chinese lives under `/zh/` with equivalent subpaths and reciprocal language
+links. The site remains static and dependency-free, with Flexoki colors, system
+fonts, automatic dark mode and a plain reading column. No remote fonts, analytics
+or theme framework are loaded. Palette: https://stephango.com/flexoki; reading
+inspiration: https://github.com/tw93/Kami.
+
+Run `python scripts/release/check_public_site.py` before publishing.
